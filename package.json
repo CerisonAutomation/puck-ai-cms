@@ -17,7 +17,7 @@
     "@ai-sdk/google": "1.0.0",
     "@vercel/kv": "3.0.0",
     "ai": "4.3.16",
-    "next": "15.3.0",
+    "next": "15.3.8",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "tailwindcss": "4.0.17",
