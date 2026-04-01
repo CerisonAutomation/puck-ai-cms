@@ -1,24 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getPage, savePage } from '@/lib/storage'
-import type { Data } from '@puckeditor/core'
+import { getPage, savePage, registerSlug } from '@/lib/storage'
+import type { Data } from '@measured/puck'
 
-type Ctx = { params: Promise<{ slug: string }> }
+type Context = { params: Promise<{ slug: string }> }
 
-export async function GET(_req: NextRequest, { params }: Ctx) {
+/**
+ * @route GET /api/pages/[slug]
+ * Returns the saved Puck page data for a slug.
+ */
+export async function GET(_req: NextRequest, { params }: Context) {
   const { slug } = await params
   const data = await getPage(slug)
   if (!data) return NextResponse.json({ error: 'Not found' }, { status: 404 })
-  return NextResponse.json(data)
+  return NextResponse.json({ data }, { status: 200 })
 }
 
-export async function PATCH(req: NextRequest, { params }: Ctx) {
-  const { slug } = await params
-  let body: unknown
+/**
+ * @route POST /api/pages/[slug]
+ * Saves Puck page data for a slug.
+ * Body: { data: Data }
+ */
+export async function POST(req: NextRequest, { params }: Context) {
   try {
-    body = await req.json()
-  } catch {
-    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
+    const { slug } = await params
+    const body = await req.json()
+    const { data } = body as { data: Data }
+    if (!data) return NextResponse.json({ error: 'Missing data field' }, { status: 400 })
+    await savePage(slug, data)
+    await registerSlug(slug)
+    return NextResponse.json({ ok: true }, { status: 200 })
+  } catch (err) {
+    console.error('[/api/pages] POST error:', err)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
-  await savePage(slug, body as Data)
-  return NextResponse.json({ ok: true })
 }

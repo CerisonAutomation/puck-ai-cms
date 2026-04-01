@@ -1,11 +1,31 @@
 import type { NextConfig } from 'next'
 
-const nextConfig: NextConfig = {
+/**
+ * @file next.config.ts
+ * Puck AI CMS — Next.js 15 production config.
+ */
+const config: NextConfig = {
   reactStrictMode: true,
+  poweredByHeader: false,
+  compress: true,
   experimental: {
-    // Required for @puckeditor/core server-side rendering
-    serverComponentsExternalPackages: [],
+    optimizePackageImports: ['@measured/puck', 'lucide-react'],
+  },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [],
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  async headers() {
+    return [
+      {
+        source: '/editor/:path*',
+        headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }],
+      },
+    ]
   },
 }
 
-export default nextConfig
+export default config

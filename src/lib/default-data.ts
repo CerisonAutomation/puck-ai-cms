@@ -1,18 +1,32 @@
-import type { Data } from '@puckeditor/core'
+import type { Data } from '@measured/puck'
 
+/**
+ * @file default-data.ts
+ * Seed data shown the first time a new page slug is opened in the editor.
+ */
 export const defaultData: Data = {
-  root: { props: {} },
   content: [
     {
       type: 'Hero',
       props: {
         id: 'hero-default',
-        title: 'Christiano Property Management',
-        subtitle: 'Premium property management services in Madrid and beyond.',
-        ctaText: 'View properties',
-        ctaHref: '/properties',
+        title: 'Welcome to Puck AI CMS',
+        subtitle: 'Drag and drop your page into shape. Powered by @measured/puck + Vercel KV.',
+        ctaText: 'Open Editor',
+        ctaHref: '/editor/home',
+        theme: 'light',
+      },
+    },
+    {
+      type: 'Text',
+      props: {
+        id: 'text-default',
+        content: 'This is a live preview. Go to /editor/home to start editing.',
+        size: 'base',
+        align: 'center',
       },
     },
   ],
+  root: { props: {} },
   zones: {},
 }
