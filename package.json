@@ -2,36 +2,35 @@
   "name": "puck-ai-cms",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": "20.x"
-  },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "lint": "eslint .",
+    "db:push": "supabase db push"
   },
   "dependencies": {
-    "@measured/puck": "0.20.2",
-    "@ai-sdk/google": "1.0.0",
-    "@vercel/kv": "3.0.0",
-    "ai": "4.3.16",
-    "next": "15.3.0",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "tailwindcss": "4.0.17",
-    "@tailwindcss/postcss": "4.0.17",
-    "postcss": "8.5.1",
-    "clsx": "2.1.1",
-    "zod": "3.24.2"
+    "@puckeditor/core": "^0.21.2",
+    "@puckeditor/plugin-ai": "^0.5.0",
+    "@puckeditor/plugin-heading-analyzer": "^0.5.0",
+    "@puckeditor/plugin-emotion-cache": "^0.5.0",
+    "@supabase/supabase-js": "^2.50.0",
+    "@supabase/ssr": "^0.6.0",
+    "next": "^15.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.0",
+    "@tailwindcss/postcss": "^4.1.0",
+    "classnames": "^2.3.2",
+    "zod": "^3.24.0",
+    "lucide-react": "^0.487.0"
   },
   "devDependencies": {
-    "@types/node": "20.17.30",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.2",
-    "eslint": "9.24.0",
-    "eslint-config-next": "15.3.0",
-    "typescript": "5.8.3"
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.8.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^15.3.0"
   }
 }

@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+@import '@puckeditor/core/dist/index.css';
+@import '@puckeditor/plugin-heading-analyzer/dist/index.css';
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+}
